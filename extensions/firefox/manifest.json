@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "PhishBlocker",
+  "version": "1.0.0",
+  "description": "AI-powered phishing detection to keep you safe while browsing",
+  "permissions": ["activeTab", "storage", "tabs", "notifications", "<all_urls>"],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

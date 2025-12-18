@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PhishBlocker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 380px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .header {
+      padding: 24px 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-size: 48px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .current-site {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .current-site h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .url {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      word-break: break-all;
+      margin-bottom: 12px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .status.safe {
+      color: #10B981;
+    }
+
+    .status.danger {
+      color: #DC2626;
+    }
+
+    .status.checking {
+      color: #FCD34D;
+    }
+
+    .stats {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .stats h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      opacity: 0.8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    button {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .footer {
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.7;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .loading {
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">🛡️</div>
+    <h1>PhishBlocker</h1>
+    <div class="tagline">AI-Powered Protection</div>
+  </div>
+
+  <div class="content">
+    <div class="current-site">
+      <h3>Current Website</h3>
+      <div class="url" id="currentUrl">Loading...</div>
+      <div class="status checking" id="status">
+        <span class="loading">⏳</span>
+        <span>Checking...</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <h3>Protection Stats</h3>
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-value" id="totalChecked">0</div>
+          <div class="stat-label">Sites Checked</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="phishingBlocked">0</div>
+          <div class="stat-label">Threats Blocked</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="checkAgain">🔄 Check Again</button>
+      <button id="openDashboard">📊 Open Dashboard</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    Protected by PhishBlocker v1.0
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

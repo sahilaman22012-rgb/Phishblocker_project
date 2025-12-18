@@ -1,0 +1,63 @@
+#url-warning-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999 !important;
+}
+
+#url-warning-box {
+    width: 380px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    animation: popin 0.25s ease-out;
+}
+
+#url-warning-box h2 {
+    margin: 12px;
+    font-size: 22px;
+}
+
+#url-warning-box p {
+    font-size: 15px;
+    max-width: 220px;
+}
+
+.warning-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 10px;
+}
+
+.close-btn {
+    background: #c0392b;
+}
+
+.continue-btn {
+    background: #27ae60;
+}
+
+@keyframes popin {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
