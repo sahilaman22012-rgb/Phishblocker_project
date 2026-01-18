@@ -60,14 +60,21 @@ def check_url():
         
         is_safe = label != "phishing"
         
+        # 🔁 Map ML output → extension status
+        if label == "benign" or score <= 40:
+            status = "safe"
+        elif score < 80:
+            status = "suspicious"
+        else:
+            status = "malicious"
         response = {
             "url": url,
             "prediction": label,
             "risk_score": round(score, 2),
             "reasons": reasons,
-            "safe": is_safe,
-            "timestamp": None  # Will be set by client
+            "status": status   # 👈 REQUIRED BY CONTENT SCRIPT
         }
+
         
         logger.info(f"Prediction: {label}, Score: {score:.2f}")
         
