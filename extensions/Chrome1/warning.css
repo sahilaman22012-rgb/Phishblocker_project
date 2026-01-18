@@ -1,63 +1,100 @@
 #url-warning-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.75);
+    inset: 0;
+    background: rgba(0,0,0,0.75);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999999 !important;
+    z-index: 999999;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 #url-warning-box {
-    width: 380px;
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 25px;
+    width: 420px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    animation: slideIn 0.3s ease;
+}
+
+.warning-header {
+    padding: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.warning-header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.icon {
+    font-size: 26px;
+}
+
+.warning-body {
+    padding: 20px;
     text-align: center;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
-    animation: popin 0.25s ease-out;
 }
 
-#url-warning-box h2 {
-    margin: 12px;
-    font-size: 22px;
+.url {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
 }
 
-#url-warning-box p {
-    font-size: 15px;
-    max-width: 220px;
+.risk-meter {
+    height: 8px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
 }
 
-.warning-btn {
-    padding: 10px 15px;
+.risk-fill {
+    height: 100%;
+    transition: width 0.4s ease;
+}
+
+.desc {
+    font-size: 14px;
+    margin: 15px 0;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1;
+    padding: 10px;
     border: none;
     border-radius: 6px;
     color: white;
     cursor: pointer;
+    margin: 0 5px;
     font-size: 14px;
-    margin: 10px;
 }
 
-.close-btn {
+.btn.danger {
     background: #c0392b;
 }
 
-.continue-btn {
+.btn.safe {
     background: #27ae60;
 }
 
-@keyframes popin {
+@keyframes slideIn {
     from {
-        transform: scale(0.8);
+        transform: translateY(20px);
         opacity: 0;
     }
     to {
-        transform: scale(1);
+        transform: translateY(0);
         opacity: 1;
     }
 }
-
