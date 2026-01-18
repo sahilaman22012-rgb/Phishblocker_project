@@ -1,67 +1,72 @@
 (async function () {
     try {
-        const urlObj = new URL(window.location.href);
-
-        const data = {
-            url: urlObj.href,
-            hostname: urlObj.hostname,
-            port: urlObj.port || (urlObj.protocol === "https:" ? "443" : "80")
-        };
-
-        // Your backend URL:
         const backendURL = "http://127.0.0.1:5000/api/check-url";
+
+        const payload = {
+            url: location.href,
+            hostname: location.hostname
+        };
 
         const res = await fetch(backendURL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
+            body: JSON.stringify(payload)
         });
 
         const result = await res.json();
-        // expected: { status: "safe" | "suspicious" | "malicious" }
+        // expected:
+        // { status, risk_score, prediction, reasons }
 
-        if (result.status === "safe") {
-            return; // No popup
-        }
+        if (result.status === "safe") return;
 
-        // Create overlay
         const overlay = document.createElement("div");
         overlay.id = "url-warning-overlay";
 
         const box = document.createElement("div");
         box.id = "url-warning-box";
 
-        let title = "";
-        let text = "";
-        let color = "";
-
-        if (result.status === "suspicious") {
-            title = "⚠️ Suspicious Website";
-            text = "Proceed with caution. This website seems suspicious.";
-            color = "orange";
-        } else {
-            title = "⛔ Malicious Website!";
-            text = "This website is marked as malicious. It may harm your system.";
-            color = "red";
-        }
+        let theme = {
+            suspicious: {
+                icon: "⚠️",
+                title: "Suspicious Website",
+                color: "#f39c12"
+            },
+            malicious: {
+                icon: "⛔",
+                title: "Malicious Website",
+                color: "#e74c3c"
+            }
+        }[result.status];
 
         box.innerHTML = `
-            <h2 style="color:${color};">${title}</h2>
-            <p>${text}</p>
+            <div class="warning-header" style="background:${theme.color}">
+                <span class="icon">${theme.icon}</span>
+                <h2>${theme.title}</h2>
+            </div>
 
-            <button class="warning-btn close-btn" id="closeTabBtn">
-                Close This Tab
-            </button>
+            <div class="warning-body">
+                <p class="url">${location.hostname}</p>
 
-            <button class="warning-btn continue-btn" id="continueBtn">
-                Continue Browsing
-            </button>
+                <div class="risk-meter">
+                    <div class="risk-fill" style="width:${result.risk_score}%; background:${theme.color}"></div>
+                </div>
+                <small>Risk Score: ${result.risk_score}%</small>
+
+                <p class="desc">
+                    Our AI model predicts this website as
+                    <b>${result.prediction}</b>.
+                </p>
+
+                <div class="actions">
+                    <button class="btn danger" id="closeTabBtn">Close Tab</button>
+                    <button class="btn safe" id="continueBtn">Continue</button>
+                </div>
+            </div>
         `;
 
         overlay.appendChild(box);
         document.body.appendChild(overlay);
 
-        // Button Actions
         document.getElementById("closeTabBtn").onclick = () => {
             chrome.runtime.sendMessage({ action: "close_tab" });
         };
@@ -70,7 +75,7 @@
             overlay.remove();
         };
 
-    } catch (err) {
-        console.error("Error in content script:", err);
+    } catch (e) {
+        console.error("Extension error:", e);
     }
 })();
