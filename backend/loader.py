@@ -1,7 +1,7 @@
 import os
 import gdown
 
-DATA_PATH = "backend/dataset.csv"
+DATA_PATH = "data/dataset.csv"
 
 if not os.path.exists(DATA_PATH):
     os.makedirs("data", exist_ok=True)
