@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import logging
-import loader
 from functools import lru_cache
 from predict_url import predict_url
 
@@ -11,11 +10,6 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
-
-df = pd.read_csv("data/dataset.csv")
-@app.route("/")
-def home():
-    return jsonify({"rows": len(df)})
 
 @lru_cache(maxsize=1000)
 def cached_predict(url):
