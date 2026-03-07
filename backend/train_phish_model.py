@@ -96,7 +96,7 @@ def extract_features(url: str) -> dict:
 
 # ---------- 2. Load & clean dataset ----------
 
-csv_path = "malicious_phish.csv"
+csv_path = "data/dataset.csv"
 df = pd.read_csv(csv_path)
 
 if "url" not in df.columns or "type" not in df.columns:
