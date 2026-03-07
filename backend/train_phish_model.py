@@ -226,5 +226,5 @@ bundle = {
     "label_encoder": le
 }
 
-joblib.dump(bundle, "phish_url_model.joblib")
+joblib.dump(bundle, "phish_url_model.joblib", compress=("lzma", 6))
 print("\n✅ Ensemble model saved to phish_url_model.joblib")
