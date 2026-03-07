@@ -35,7 +35,7 @@ export default function Dashboard() {
     setResult(null)
 
     try {
-      const response = await fetch("http://localhost:5000/api/check-url", {
+      const response = await fetch("https://phishblocker-project.onrender.com/api/check-url", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export default function Dashboard() {
       const data = await response.json()
       setResult(data)
     } catch (err) {
-      setError("Failed to check URL. Make sure the backend API is running on http://localhost:5000")
+      setError("Failed to check URL. Make sure the backend API is running on https://phishblocker-project.onrender.com")
       console.error(err)
     } finally {
       setLoading(false)
