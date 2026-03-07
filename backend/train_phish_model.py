@@ -146,8 +146,8 @@ X_test_scaled = scaler.transform(X_test)
 # ---------- 6. Define models: RF + Boosting + DNN (MLP) ----------
 
 rf_clf = RandomForestClassifier(
-    n_estimators=120,
-    max_depth=18,
+    n_estimators=60,
+    max_depth=14,
     min_samples_split=4,
     min_samples_leaf=2,
     class_weight="balanced",
