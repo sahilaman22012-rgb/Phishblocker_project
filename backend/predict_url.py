@@ -1,5 +1,6 @@
 import joblib
 import pandas as pd
+import model_loader
 from urllib.parse import urlparse
 import re
 import os
