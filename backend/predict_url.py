@@ -92,6 +92,7 @@ def extract_features(url: str) -> dict:
 # Get the directory where this script is located
 _model_lock = threading.Lock()
 logger = logging.getLogger(__name__)
+bundle = joblib.load("phish_url_model.joblib")
 
 def load_model():
     global bundle, scaler, rf_model, gb_model, dnn_model, label_encoder
