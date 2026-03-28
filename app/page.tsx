@@ -279,7 +279,7 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <Button variant="secondary" size="lg" className="w-full" asChild>
-                  <a href="/public/phishblocker-extension.zip" download>
+                  <a href="/phishblocker-extension.zip" download>
                     <Download className="w-4 h-4 mr-2" />
                     Download Extension
                   </a>
@@ -298,7 +298,7 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <Button variant="secondary" size="lg" className="w-full" asChild>
-                  <a href="/public/phishblocker-extensio.zip" download>
+                  <a href="/phishblocker-extensio.zip" download>
                     <Download className="w-4 h-4 mr-2" />
                     Download Extension
                   </a>
