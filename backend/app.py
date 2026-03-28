@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import logging
+import os
 from functools import lru_cache
 from predict_url import predict_url
 
@@ -152,5 +153,6 @@ if __name__ == '__main__':
     except Exception as e:
         logger.error(f"Failed to load model: {e}")
         logger.error("Make sure you have run train_phish_model.py first!")
-    
-    app.run(host='0.0.0.0', port=5000, debug=False, threaded=True)
+
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
