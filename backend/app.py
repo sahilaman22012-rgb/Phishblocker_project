@@ -17,6 +17,10 @@ def cached_predict(url):
     """Cache predictions for frequently checked URLs"""
     return predict_url(url)
 
+@app.route("/")
+def home():
+    return "PhishBlocker Backend is Running 🚀"
+
 @app.route('/health', methods=['GET'])
 def health():
     """Health check endpoint"""
