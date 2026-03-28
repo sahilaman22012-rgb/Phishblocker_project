@@ -3,7 +3,7 @@ import requests
 import joblib
 
 MODEL_PATH = "model.joblib"
-MODEL_URL = "https://drive.google.com/uc?id=16U7-OJxRz44B_dYQSyR0s0ThbZ7Mu6FH"
+MODEL_URL = "https://drive.google.com/uc?export=download&id=1CJ6sujjogxh53vb256rc1RTbtHi62pLi"
 
 def download_model():
     if os.path.exists(MODEL_PATH):
