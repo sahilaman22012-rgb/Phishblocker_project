@@ -148,11 +148,11 @@ export default function Dashboard() {
               {result && (
                 <div
                   className={`p-6 rounded-lg border-2 ${
-                    result.safe ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
+                    result.prediction !== "phishing" ? "bg-green-50 border-green-200" : "bg-red-50 border-red-200"
                   }`}
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    {result.safe ? (
+                    {result.prediction !== "phishing" ? (
                       <>
                         <CheckCircle className="w-8 h-8 text-green-600" />
                         <div className="text-left">
